@@ -4,7 +4,7 @@
 #
 Name     : nicstat
 Version  : 1.95
-Release  : 10
+Release  : 11
 URL      : https://downloads.sourceforge.net/nicstat/nicstat-1.95.tar.gz
 Source0  : https://downloads.sourceforge.net/nicstat/nicstat-1.95.tar.gz
 Summary  : No detailed summary available
@@ -41,9 +41,15 @@ doc components for the nicstat package.
 %patch1 -p1
 
 %build
-make V=1 %{?_smp_mflags}
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
+export LANG=C
+export SOURCE_DATE_EPOCH=1510166473
+make V=1  %{?_smp_mflags} DEFAULTFLAGS="$CFLAGS"
 
 %install
+export SOURCE_DATE_EPOCH=1510166473
 rm -rf %{buildroot}
 install -p -D -m 0755 %{name} %{buildroot}%{_bindir}/%{name}
 ## make_install_append content

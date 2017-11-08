@@ -26,7 +26,7 @@ diff -Naur nicstat-1.95a/Makefile nicstat-1.95/Makefile
 +#CMODEL =
 +CMODEL =	-m64
 +
-+CFLAGS =	$(COPT) $(CMODEL)
++CFLAGS =	$(COPT) $(CMODEL) $(DEFAULTFLAGS)
 +
 +INSTALL =	install -o bin -g bin
 +SETUINSTALL =	install -o root -g root -m 4511
