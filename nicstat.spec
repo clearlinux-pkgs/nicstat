@@ -4,7 +4,7 @@
 #
 Name     : nicstat
 Version  : 1.95
-Release  : 11
+Release  : 12
 URL      : https://downloads.sourceforge.net/nicstat/nicstat-1.95.tar.gz
 Source0  : https://downloads.sourceforge.net/nicstat/nicstat-1.95.tar.gz
 Summary  : No detailed summary available
