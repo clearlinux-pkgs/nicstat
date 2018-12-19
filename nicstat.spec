@@ -4,14 +4,15 @@
 #
 Name     : nicstat
 Version  : 1.95
-Release  : 13
-URL      : https://downloads.sourceforge.net/nicstat/nicstat-1.95.tar.gz
-Source0  : https://downloads.sourceforge.net/nicstat/nicstat-1.95.tar.gz
+Release  : 14
+URL      : https://sourceforge.net/projects/nicstat/files/nicstat-1.95.tar.gz
+Source0  : https://sourceforge.net/projects/nicstat/files/nicstat-1.95.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Artistic-2.0
-Requires: nicstat-bin
-Requires: nicstat-doc
+Requires: nicstat-bin = %{version}-%{release}
+Requires: nicstat-license = %{version}-%{release}
+Requires: nicstat-man = %{version}-%{release}
 Patch1: nicstat-makefile.patch
 
 %description
@@ -23,17 +24,27 @@ distribution, or at http://www.perlfoundation.org/artistic_license_2_0
 %package bin
 Summary: bin components for the nicstat package.
 Group: Binaries
+Requires: nicstat-license = %{version}-%{release}
+Requires: nicstat-man = %{version}-%{release}
 
 %description bin
 bin components for the nicstat package.
 
 
-%package doc
-Summary: doc components for the nicstat package.
-Group: Documentation
+%package license
+Summary: license components for the nicstat package.
+Group: Default
 
-%description doc
-doc components for the nicstat package.
+%description license
+license components for the nicstat package.
+
+
+%package man
+Summary: man components for the nicstat package.
+Group: Default
+
+%description man
+man components for the nicstat package.
 
 
 %prep
@@ -45,16 +56,19 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1510166473
-make V=1  %{?_smp_mflags} DEFAULTFLAGS="$CFLAGS"
+export SOURCE_DATE_EPOCH=1545263069
+make  %{?_smp_mflags} DEFAULTFLAGS="$CFLAGS"
+
 
 %install
-export SOURCE_DATE_EPOCH=1510166473
+export SOURCE_DATE_EPOCH=1545263069
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/nicstat
+cp LICENSE.txt %{buildroot}/usr/share/package-licenses/nicstat/LICENSE.txt
 install -p -D -m 0755 %{name} %{buildroot}%{_bindir}/%{name}
-## make_install_append content
+## install_append content
 install -p -D -m 0644 %{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
-## make_install_append end
+## install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -63,6 +77,10 @@ install -p -D -m 0644 %{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
 %defattr(-,root,root,-)
 /usr/bin/nicstat
 
-%files doc
-%defattr(-,root,root,-)
-%doc /usr/share/man/man1/*
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/nicstat/LICENSE.txt
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/nicstat.1
