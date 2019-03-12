@@ -4,10 +4,10 @@
 #
 Name     : nicstat
 Version  : 1.95
-Release  : 14
+Release  : 15
 URL      : https://sourceforge.net/projects/nicstat/files/nicstat-1.95.tar.gz
 Source0  : https://sourceforge.net/projects/nicstat/files/nicstat-1.95.tar.gz
-Summary  : No detailed summary available
+Summary  : Network traffic statics utility
 Group    : Development/Tools
 License  : Artistic-2.0
 Requires: nicstat-bin = %{version}-%{release}
@@ -25,7 +25,6 @@ distribution, or at http://www.perlfoundation.org/artistic_license_2_0
 Summary: bin components for the nicstat package.
 Group: Binaries
 Requires: nicstat-license = %{version}-%{release}
-Requires: nicstat-man = %{version}-%{release}
 
 %description bin
 bin components for the nicstat package.
@@ -56,18 +55,19 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1545263069
+export SOURCE_DATE_EPOCH=1552407891
+export LDFLAGS="${LDFLAGS} -fno-lto"
 make  %{?_smp_mflags} DEFAULTFLAGS="$CFLAGS"
 
 
 %install
-export SOURCE_DATE_EPOCH=1545263069
+export SOURCE_DATE_EPOCH=1552407891
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/nicstat
 cp LICENSE.txt %{buildroot}/usr/share/package-licenses/nicstat/LICENSE.txt
-install -p -D -m 0755 %{name} %{buildroot}%{_bindir}/%{name}
+install -p -D -m 0755 nicstat %{buildroot}/usr/bin/nicstat
 ## install_append content
-install -p -D -m 0644 %{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
+install -p -D -m 0644 nicstat.1 %{buildroot}/usr/share/man/man1/nicstat.1
 ## install_append end
 
 %files

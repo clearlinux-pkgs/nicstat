@@ -1,1 +1,1 @@
-install -p -D -m 0755 %{name} %{buildroot}%{_bindir}/%{name}
+install -p -D -m 0755 nicstat %{buildroot}/usr/bin/nicstat

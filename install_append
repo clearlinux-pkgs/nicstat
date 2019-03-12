@@ -1,1 +1,1 @@
-install -p -D -m 0644 %{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
+install -p -D -m 0644 nicstat.1 %{buildroot}/usr/share/man/man1/nicstat.1
