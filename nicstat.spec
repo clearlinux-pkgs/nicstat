@@ -4,7 +4,7 @@
 #
 Name     : nicstat
 Version  : 1.95
-Release  : 15
+Release  : 16
 URL      : https://sourceforge.net/projects/nicstat/files/nicstat-1.95.tar.gz
 Source0  : https://sourceforge.net/projects/nicstat/files/nicstat-1.95.tar.gz
 Summary  : Network traffic statics utility
