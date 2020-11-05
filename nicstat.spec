@@ -4,10 +4,10 @@
 #
 Name     : nicstat
 Version  : 1.95
-Release  : 16
+Release  : 17
 URL      : https://sourceforge.net/projects/nicstat/files/nicstat-1.95.tar.gz
 Source0  : https://sourceforge.net/projects/nicstat/files/nicstat-1.95.tar.gz
-Summary  : Network traffic statics utility
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Artistic-2.0
 Requires: nicstat-bin = %{version}-%{release}
@@ -48,23 +48,28 @@ man components for the nicstat package.
 
 %prep
 %setup -q -n nicstat-1.95
+cd %{_builddir}/nicstat-1.95
 %patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1552407891
-export LDFLAGS="${LDFLAGS} -fno-lto"
-make  %{?_smp_mflags} DEFAULTFLAGS="$CFLAGS"
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604606635
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
+make  %{?_smp_mflags}  DEFAULTFLAGS="$CFLAGS"
 
 
 %install
-export SOURCE_DATE_EPOCH=1552407891
+export SOURCE_DATE_EPOCH=1604606635
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/nicstat
-cp LICENSE.txt %{buildroot}/usr/share/package-licenses/nicstat/LICENSE.txt
+cp %{_builddir}/nicstat-1.95/LICENSE.txt %{buildroot}/usr/share/package-licenses/nicstat/1292bbd3916fdbca9f00e32ab6c3f28f8cf6c308
 install -p -D -m 0755 nicstat %{buildroot}/usr/bin/nicstat
 ## install_append content
 install -p -D -m 0644 nicstat.1 %{buildroot}/usr/share/man/man1/nicstat.1
@@ -79,7 +84,7 @@ install -p -D -m 0644 nicstat.1 %{buildroot}/usr/share/man/man1/nicstat.1
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/nicstat/LICENSE.txt
+/usr/share/package-licenses/nicstat/1292bbd3916fdbca9f00e32ab6c3f28f8cf6c308
 
 %files man
 %defattr(0644,root,root,0755)
